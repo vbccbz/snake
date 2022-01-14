@@ -1,13 +1,3 @@
-#if 0
-50
-25
-50
-25
-500
-200
-10 x 20
-#endif
-
 #include <conio.h>
 #include <windows.h>
 //#include <stdio.h>
