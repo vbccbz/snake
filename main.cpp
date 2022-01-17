@@ -1,23 +1,18 @@
-#include <conio.h>
-#include <windows.h>
-//#include <stdio.h>
-#include <iostream>
-#include <iomanip>
+#include "Keyboard.h"
+#include "Dot.h"
+#include "Printer.h"
+#include "Snake.h"
+#include "Table.h"
+
 int main(void) {
-  char c;
+  Dot dot(5, 5);
+  Printer printer;
+  Keyboard keyboard;
   while (1) {
-    //  c = _getch();
-    //  std::cout << (int)c << '\n';
-    for (size_t i = 0; i < 25; i++) {
-      //printf("%2d ", i);
-      std::cout << std::setw(2) << i << ' ';
-      for (size_t i = 0; i < 50; i++) {
-        std::cout << "*";
-      }
-      std::cout << '\n';
-    }
-    Sleep(500);  // sleep(10);
-    system("cls");
+    keyboard.input(dot);
+    dot.print_coordinate();
+    printer.write(dot);  // dot.write(arr); // dot.write(printer);
+    printer.print();     // print(arr);
   }
   return 0;
 }
