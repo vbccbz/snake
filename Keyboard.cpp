@@ -24,3 +24,27 @@ void Keyboard::input(Dot& dot) {
     }
   }
 }
+
+void Keyboard::input(DotMoving& dotm) {
+  if (_kbhit()) {
+    switch (_getch()) {
+      case 'w':
+        dotm.up_direction();
+        break;
+      case 's':
+        dotm.down_direction();
+        break;
+      case 'a':
+        dotm.left_direction();
+        break;
+      case 'd':
+        dotm.right_direction();
+        break;
+      default:
+        dotm.unchange_direction();
+        break;
+    }
+  } else {
+    dotm.unchange_direction();
+  }
+}

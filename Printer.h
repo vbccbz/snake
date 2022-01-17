@@ -1,4 +1,6 @@
 #include "Dot.h"
+#include "DotMoving.h"
+
 #pragma once
 
 class Printer {
@@ -6,6 +8,8 @@ class Printer {
   Printer(void);
   ~Printer(void);
   void write(Dot& dot);
+  void write(DotMoving& dotm);
+
   void print(void);
 
  private:

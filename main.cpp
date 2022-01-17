@@ -1,18 +1,28 @@
-#include "Keyboard.h"
 #include "Dot.h"
-#include "Printer.h"
+#include "DotMoving.h"
 #include "Snake.h"
-#include "Table.h"
+
+//#include "Keyboard.h"
+#include "Printer.h"
+#include "World.h"
 
 int main(void) {
-  Dot dot(5, 5);
+  // Dot dot(5, 5);
+  DotMoving dotm(5, 5);
   Printer printer;
-  Keyboard keyboard;
+  World world;
+
   while (1) {
-    keyboard.input(dot);
-    dot.print_coordinate();
-    printer.write(dot);  // dot.write(arr); // dot.write(printer);
-    printer.print();     // print(arr);
+    // world.logic(dot);
+    // dot.print_coordinate();
+    // printer.write(dot);
+    //printer.print();
+
+    world.logic(dotm);
+    dotm.print_coordinate();
+    
+    printer.write(dotm);
+    printer.print();
   }
   return 0;
 }
