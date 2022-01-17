@@ -1,11 +1,10 @@
-#include <iostream>
 
 #include "DotMoving.h"
 
 DotMoving::DotMoving(int c1, int c2) {
   column = c1;
   row = c2;
-  direction = 3;
+  direction = direction::right;
 }
 
 DotMoving::~DotMoving(void) { ; }
@@ -25,7 +24,7 @@ void DotMoving::up_direction(void) {
   if (row < 0) {
     row = 9;
   }
-  direction = 0;
+  direction = direction::up;
 }
 
 void DotMoving::down_direction(void) {
@@ -33,7 +32,7 @@ void DotMoving::down_direction(void) {
   if (row > 9) {
     row = 0;
   }
-  direction = 1;
+  direction = direction::down;
 }
 
 void DotMoving::left_direction(void) {
@@ -41,7 +40,7 @@ void DotMoving::left_direction(void) {
   if (column < 0) {
     column = 9;
   }
-  direction = 2;
+  direction = direction::left;
 }
 
 void DotMoving::right_direction(void) {
@@ -49,21 +48,21 @@ void DotMoving::right_direction(void) {
   if (column > 9) {
     column = 0;
   }
-  direction = 3;
+  direction = direction::right;
 }
 
 void DotMoving::unchange_direction(void) {
   switch (direction) {
-    case 0:
+    case direction::up :
       up_direction();
       break;
-    case 1:
+    case direction::down :
       down_direction();
       break;
-    case 2:
+    case direction::left :
       left_direction();
       break;
-    case 3:
+    case direction::right :
       right_direction();
       break;
     default: 

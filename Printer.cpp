@@ -35,7 +35,7 @@ void Printer::print(void) {
     std::cout << '\n';
     // Sleep(10);
   }
-  Sleep(50);
+  Sleep(100);
   system("cls");
   return;
 }

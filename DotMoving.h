@@ -1,5 +1,6 @@
 #pragma once
-#pragma once
+#include <iostream>
+
 class DotMoving {
  public:
   DotMoving(int c1 = 5, int c2 = 5);
@@ -17,5 +18,5 @@ class DotMoving {
  private:
   int column;
   int row;
-  int direction;
+  enum class direction { left, right, up, down } direction;
 };

@@ -2,7 +2,6 @@
 #include "DotMoving.h"
 #include "Snake.h"
 
-//#include "Keyboard.h"
 #include "Printer.h"
 #include "World.h"
 
@@ -20,7 +19,6 @@ int main(void) {
 
     world.logic(dotm);
     dotm.print_coordinate();
-    
     printer.write(dotm);
     printer.print();
   }
