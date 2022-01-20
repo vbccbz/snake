@@ -18,5 +18,7 @@ class DotMoving {
  private:
   int column;
   int row;
-  enum class direction { left, right, up, down } direction;
+  enum class direction { 
+	  left, right, up, down 
+  } direction;
 };

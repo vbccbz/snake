@@ -1,4 +1,3 @@
-
 #include "DotMoving.h"
 
 DotMoving::DotMoving(int c1, int c2) {
@@ -6,12 +5,7 @@ DotMoving::DotMoving(int c1, int c2) {
   row = c2;
   direction = direction::right;
 }
-
 DotMoving::~DotMoving(void) { ; }
-
-// int DotMoving::get_column(void) { return column; }
-
-// int DotMoving::get_row(void) { return row; }
 
 void DotMoving::print_coordinate(void) {
   std::cout << "DotMoving" << '\n';
@@ -26,7 +20,6 @@ void DotMoving::up_direction(void) {
   }
   direction = direction::up;
 }
-
 void DotMoving::down_direction(void) {
   row += 1;
   if (row > 9) {
@@ -34,7 +27,6 @@ void DotMoving::down_direction(void) {
   }
   direction = direction::down;
 }
-
 void DotMoving::left_direction(void) {
   column -= 1;
   if (column < 0) {
@@ -42,7 +34,6 @@ void DotMoving::left_direction(void) {
   }
   direction = direction::left;
 }
-
 void DotMoving::right_direction(void) {
   column += 1;
   if (column > 9) {
@@ -50,7 +41,6 @@ void DotMoving::right_direction(void) {
   }
   direction = direction::right;
 }
-
 void DotMoving::unchange_direction(void) {
   switch (direction) {
     case direction::up :

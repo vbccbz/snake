@@ -7,7 +7,9 @@
 
 int main(void) {
   // Dot dot(5, 5);
-  DotMoving dotm(5, 5);
+  //DotMoving dotm(5, 5);
+  Snake snake ;
+
   Printer printer;
   World world;
 
@@ -15,11 +17,13 @@ int main(void) {
     // world.logic(dot);
     // dot.print_coordinate();
     // printer.write(dot);
-    //printer.print();
 
-    world.logic(dotm);
-    dotm.print_coordinate();
-    printer.write(dotm);
+    //world.logic(dotm);
+    //dotm.print_coordinate();
+    //printer.write(dotm);
+
+    world.logic(snake);
+    printer.write(snake);
     printer.print();
   }
   return 0;
