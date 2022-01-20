@@ -1,6 +1,5 @@
 #include "Dot.h"
 #include "DotMoving.h"
-#include "Snake.h"
 
 #pragma once
 
@@ -13,9 +12,12 @@ class Printer {
 
   void write(Dot&);
   void write(DotMoving&);
-  void write(Snake&);
+  
 
- private:
   char buffer[100];
+  
+ private:
+  // char buffer[100]; ??????????????????????????? Что лучше? private и get_buffer или public ?
+
   //struct Pixel { int row, int column} pixels[100]; ????????
 };

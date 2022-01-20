@@ -1,7 +1,10 @@
 #include <string.h>
+#include "Printer.h"
+
 #pragma once
 class Snake {
   friend class Printer;
+
  public:
   Snake(void);
   ~Snake(void);
@@ -15,6 +18,8 @@ class Snake {
   void refresh_coordinate(void);
   void resize(void);
   
+  void write(Printer &);
+
   struct coordinate {
     int row;
     int column;

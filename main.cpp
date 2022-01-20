@@ -23,7 +23,7 @@ int main(void) {
     //printer.write(dotm);
 
     world.logic(snake);
-    printer.write(snake);
+    snake.write(printer);
     printer.print();
   }
   return 0;

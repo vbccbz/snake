@@ -95,3 +95,11 @@ void Snake::refresh_coordinate(void) {
   }
 }
 void Snake::resize(void) {}
+
+void Snake::write(Printer & printer) {
+    memset(printer.buffer, '-', 100);
+    for (size_t element = 0; body[element].row != -1; ++element) {
+      printer.buffer[body[element].row * 10 + body[element].column] = 'X';
+    }
+  return;
+}

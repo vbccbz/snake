@@ -17,7 +17,7 @@ void Printer::print(void) {
     std::cout << '\n';
     // Sleep(10);
   }
-  Sleep(200);
+  Sleep(150);
   system("cls");
   return;
 }
@@ -33,11 +33,7 @@ void Printer::write(DotMoving & dotm) {
   buffer [dotm.row * 10 + dotm.column] = 'X';
   return;
 }
-void Printer::write(Snake& snake) {
-  memset(buffer, '-', 100);
-    for (size_t element = 0; snake.body[element].row != -1; ++element) {
-      buffer [snake.body[element].row * 10 + snake.body[element].column] = 'X';
-    }
-    return;
-}
+
+
+
 

@@ -3,7 +3,6 @@
 
 #include "Dot.h"
 #include "DotMoving.h"
-//#include "Snake.h"
 
 class Keyboard {
  public:
