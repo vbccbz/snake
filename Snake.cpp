@@ -36,8 +36,26 @@ void Snake::up_direction(void) {
 
   direction = direction::up;
 }
-void Snake::down_direction(void) {}
-void Snake::left_direction(void) {}
+void Snake::down_direction(void) {
+  refresh_coordinate();
+
+  body[0].row += 1;
+  if (body[0].row > 9) {
+    body[0].row = 0;
+  }
+
+  direction = direction::down;
+}
+void Snake::left_direction(void) {
+  refresh_coordinate();
+
+  body[0].column -= 1;
+  if (body[0].column < 0) {
+    body[0].column = 9;
+  }
+
+  direction = direction::left;
+}
 void Snake::right_direction(void) {
   refresh_coordinate();
 
