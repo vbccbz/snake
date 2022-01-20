@@ -27,14 +27,7 @@ void Snake::up_direction(void) {
   //  temp = swap;
   //}
 
-  Snake::coordinate temp, swap;
-  temp = body[0];
-  //for (size_t element = 0; element < 100; element++) {
-    for (size_t element = 0; body[element].column != -1; element++) {
-    swap = body[element];
-    body[element] = temp;
-    temp = swap;
-  }
+  refresh_coordinate();
 
   body[0].row -= 1;
   if (body[0].row < 0) {
@@ -46,13 +39,7 @@ void Snake::up_direction(void) {
 void Snake::down_direction(void) {}
 void Snake::left_direction(void) {}
 void Snake::right_direction(void) {
-  Snake::coordinate temp, swap;
-  temp = body[0];
-  for (size_t element = 0; body[element].column != -1; element++) {
-    swap = body[element];
-    body[element] = temp;
-    temp = swap;
-  }
+  refresh_coordinate();
 
   body[0].column += 1;
   if (body[0].column > 9) {
@@ -80,5 +67,13 @@ void Snake::unchange_direction(void) {
   }
 }
 
-void Snake::refresh_coordinate(void) {}
+void Snake::refresh_coordinate(void) {
+  Snake::coordinate temp, swap;
+  temp = body[0];
+  for (size_t element = 0; body[element].column != -1; element++) {
+    swap = body[element];
+    body[element] = temp;
+    temp = swap;
+  }
+}
 void Snake::resize(void) {}
