@@ -6,7 +6,7 @@ Keyboard::Keyboard(void) {
 
 Keyboard::~Keyboard(void) {}
 
-Keyboard::key Keyboard::input(void) {  ////////////?
+void Keyboard::input(void) {  ////////////?
   if (_kbhit()) {
     switch (_getch()) {
       case 'w':
@@ -31,5 +31,5 @@ Keyboard::key Keyboard::input(void) {  ////////////?
   } else {
     code = key::none;
   }
-  return code;
+  return;
 }

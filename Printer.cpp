@@ -14,5 +14,7 @@ void Printer::print(void) {
   }
   Sleep(500);
   system("cls");
+  memset(buffer, '-', 100);
+
   return;
 }

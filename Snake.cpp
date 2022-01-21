@@ -5,7 +5,7 @@ Snake::Snake(int size) {
     body[element].row = -1;
     body[element].column = -1;
   }
-  
+
   int start_position = 5;
   for (size_t element = 0; element < size; element++) {
     body[element].row = 5;
@@ -88,11 +88,41 @@ void Snake::refresh_coordinate(void) {
   return;
 }
 
-void Snake::write(Printer & printer) {
-    memset(printer.buffer, '-', 100);
-    for (size_t element = 0; body[element].row != -1; ++element) {
-      int position = body[element].row * 10 + body[element].column;
-      printer.buffer[position] = 'X';
-    }
+void Snake::set_direction(Keyboard::key& key) {
+  switch (key) {
+    case Keyboard::key::up:
+      up_direction();
+      break;
+    case Keyboard::key::down:
+      down_direction();
+      break;
+    case Keyboard::key::left:
+      left_direction();
+      break;
+    case Keyboard::key::right:
+      right_direction();
+      break;
+    case Keyboard::key::any:
+      unchange_direction();
+      break;
+    case Keyboard::key::none:
+      unchange_direction();
+      break;
+
+    case Keyboard::key::esc:
+
+      break;
+
+    default:
+      break;
+  }
+  return;
+}
+
+void Snake::write(Printer& printer) {
+  for (size_t element = 0; body[element].row != -1; ++element) {
+    int position = body[element].row * 10 + body[element].column;
+    printer.buffer[position] = 'X';
+  }
   return;
 }

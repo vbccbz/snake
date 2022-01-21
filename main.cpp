@@ -1,18 +1,26 @@
+#include "Keyboard.h"
 #include "Snake.h"
-#include "World.h"
+#include "Fruit.h"
 #include "Printer.h"
+#include "World.h"
 
 int main(void) {
-  Snake snake ;
+  Keyboard keyboard;
+  Snake snake;
+  Fruit fruit;
   Printer printer;
   World world;
 
-  snake.write(printer);
-  printer.print();
-
   while (1) {
-    world.logic(snake);
+    keyboard.input();
+    
+    //fruit.generate();
+    //fruit.write(printer);
+
+    snake.set_direction(keyboard.code);
     snake.write(printer);
+    
+
     printer.print();
   }
   return 0;

@@ -10,5 +10,5 @@ class World {
  public:
   World();
   ~World();
-  void logic(Snake& snake);
+  void logic(void);
 };
