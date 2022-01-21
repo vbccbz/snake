@@ -1,5 +1,6 @@
-#include "Dot.h"
-#include "DotMoving.h"
+#include <iostream>
+#include <string.h>
+#include <windows.h>
 
 #pragma once
 
@@ -10,14 +11,8 @@ class Printer {
 
   void print(void);
 
-  void write(Dot&);
-  void write(DotMoving&);
-  
-
   char buffer[100];
-  
  private:
   // char buffer[100]; ??????????????????????????? Что лучше? private и get_buffer или public ?
-
-  //struct Pixel { int row, int column} pixels[100]; ????????
+  //struct Pixel { int row, int column} buffer[100]; ????????
 };

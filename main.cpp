@@ -1,27 +1,16 @@
-#include "Dot.h"
-#include "DotMoving.h"
 #include "Snake.h"
-
-#include "Printer.h"
 #include "World.h"
+#include "Printer.h"
 
 int main(void) {
-  // Dot dot(5, 5);
-  //DotMoving dotm(5, 5);
   Snake snake ;
-
   Printer printer;
   World world;
 
+  snake.write(printer);
+  printer.print();
+
   while (1) {
-    // world.logic(dot);
-    // dot.print_coordinate();
-    // printer.write(dot);
-
-    //world.logic(dotm);
-    //dotm.print_coordinate();
-    //printer.write(dotm);
-
     world.logic(snake);
     snake.write(printer);
     printer.print();

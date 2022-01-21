@@ -1,32 +1,23 @@
 #include "Snake.h"
 
-Snake::Snake(void) {
+Snake::Snake(int size) {
   for (size_t element = 0; element < 100; element++) {
     body[element].row = -1;
     body[element].column = -1;
   }
-  direction = direction::right;
-  body[0].row = 5;
-  body[1].row = 5;
-  body[2].row = 5;
-  body[3].row = 5;
+  
+  int start_position = 5;
+  for (size_t element = 0; element < size; element++) {
+    body[element].row = 5;
+    body[element].column = start_position;
+    --start_position;
+  }
 
-  body[0].column = 0;
-  body[1].column = 1;
-  body[2].column = 2;
-  body[3].column = 3;
+  direction = direction::right;
 };
 Snake::~Snake(void) {}
 
 void Snake::up_direction(void) {
-  // int temp, swap;
-  // temp = 0;
-  // for (size_t element = 0; element < 5; element++) {
-  //  swap = array[element];
-  //  array[element] = temp;
-  //  temp = swap;
-  //}
-
   refresh_coordinate();
 
   body[0].row -= 1;
@@ -83,6 +74,7 @@ void Snake::unchange_direction(void) {
     default:
       break;
   }
+  return;
 }
 
 void Snake::refresh_coordinate(void) {
@@ -93,13 +85,14 @@ void Snake::refresh_coordinate(void) {
     body[element] = temp;
     temp = swap;
   }
+  return;
 }
-void Snake::resize(void) {}
 
 void Snake::write(Printer & printer) {
     memset(printer.buffer, '-', 100);
     for (size_t element = 0; body[element].row != -1; ++element) {
-      printer.buffer[body[element].row * 10 + body[element].column] = 'X';
+      int position = body[element].row * 10 + body[element].column;
+      printer.buffer[position] = 'X';
     }
   return;
 }

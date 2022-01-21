@@ -6,7 +6,7 @@ class Snake {
   friend class Printer;
 
  public:
-  Snake(void);
+  Snake(int size = 2);
   ~Snake(void);
 
   void up_direction(void);
@@ -16,7 +16,6 @@ class Snake {
   void unchange_direction(void);
 
   void refresh_coordinate(void);
-  void resize(void);
   
   void write(Printer &);
 
@@ -26,12 +25,11 @@ class Snake {
   };
 
  private:
-  Snake::coordinate body[100];
+  coordinate body[100];
   enum class direction { 
     left, 
     right, 
     up, 
     down 
   } direction;
-  
 };

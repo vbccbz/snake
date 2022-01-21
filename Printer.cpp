@@ -1,8 +1,3 @@
-#include <iostream>
-#include <iomanip>
-#include <string.h>
-#include <windows.h>
-
 #include "Printer.h"
 
 Printer::Printer(void) { memset(buffer, '-', 100); }
@@ -17,23 +12,7 @@ void Printer::print(void) {
     std::cout << '\n';
     // Sleep(10);
   }
-  Sleep(150);
+  Sleep(500);
   system("cls");
   return;
 }
-
-void Printer::write(Dot& dot) {
-  memset(buffer, '-', 100);
-  // buffer[dot.get_row() * 10 + dot.get_column()] = 'X';
-  buffer[dot.row * 10 + dot.column] = 'X';
-  return;
-}
-void Printer::write(DotMoving & dotm) {
-  memset(buffer, '-', 100);
-  buffer [dotm.row * 10 + dotm.column] = 'X';
-  return;
-}
-
-
-
-
