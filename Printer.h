@@ -9,10 +9,18 @@ class Printer {
   Printer(void);
   ~Printer(void);
 
+  char buffer[100];
+
+  //struct pixel {
+  //  int row;
+  //  int column;
+  //};
+  //pixel buffer2[100];
+
   void print(void);
 
-  char buffer[100];
  private:
+  void clear(void);
   // char buffer[100]; ??????????????????????????? Что лучше? private и get_buffer или public ?
   //struct Pixel { int row, int column} buffer[100]; ????????
 };

@@ -1,38 +1,38 @@
 #include <string.h>
-#include "Printer.h"
+
 #include "Keyboard.h"
+#include "Printer.h"
 
 #pragma once
 class Snake {
   friend class Printer;
 
  public:
-  Snake(int size = 5);
+  Snake(void);
   ~Snake(void);
 
-  void up_direction(void);
-  void down_direction(void);
-  void left_direction(void);
-  void right_direction(void);
-  
-  void unchange_direction(void);
-  void refresh_coordinate(void);
-  
-  void set_direction(Keyboard::key & key);
+  void set_direction(Keyboard::keys &key, Printer &printer);
+
+  void refresh_coordinates(Printer &printer);
+
+  void up_direction(Printer &printer);
+  void down_direction(Printer &printer);
+  void left_direction(Printer &printer);
+  void right_direction(Printer &printer);
+
+  void unchange_direction(Printer &printer);
 
   void write(Printer &);
 
  private:
-
   struct coordinate {
     int row;
     int column;
   };
-  coordinate body[100];
-  enum class direction { 
-    left, 
-    right, 
-    up, 
-    down 
-  } direction;
+  struct element {
+    coordinate position;
+  };
+  element body[100];
+  enum class direction { left, right, up, down };
+  direction direction;
 };

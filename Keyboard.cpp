@@ -1,8 +1,6 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard(void) { 
-  code = key::none; 
-}
+Keyboard::Keyboard(void) { key = keys::none; }
 
 Keyboard::~Keyboard(void) {}
 
@@ -10,26 +8,26 @@ void Keyboard::input(void) {  ////////////?
   if (_kbhit()) {
     switch (_getch()) {
       case 'w':
-        code = key::up;
+        key = keys::up;
         break;
       case 's':
-        code = key::down;
+        key = keys::down;
         break;
       case 'a':
-        code = key::left;
+        key = keys::left;
         break;
       case 'd':
-        code = key::right;
+        key = keys::right;
         break;
-      case ';':
-        code = key::esc;
+      case 27: //case 'ESC':
+        key = keys::esc;
         break;
       default:
-        code = key::any;
+        key = keys::any;
         break;
     }
   } else {
-    code = key::none;
+    key = keys::none;
   }
   return;
 }
