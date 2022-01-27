@@ -2,104 +2,134 @@
 
 Snake::Snake(void) {
   for (size_t element = 0; element < 100; element++) {
-    body[element].row = -1;
-    body[element].column = -1;
+    body[element].position.row = -1;
+    body[element].position.column = -1;
   }
-  direction = direction::right;
-  body[0].row = 5;
-  body[1].row = 5;
-  body[2].row = 5;
-  body[3].row = 5;
 
-  body[0].column = 0;
-  body[1].column = 1;
-  body[2].column = 2;
-  body[3].column = 3;
+  body[0].position.row = 5;
+  body[0].position.column = 5;
+  body[1].position.row = 5;
+  body[1].position.column = 6;
+
+  direction = direction::right;
+  length = 2;
 };
 Snake::~Snake(void) {}
 
-void Snake::up_direction(void) {
-  // int temp, swap;
-  // temp = 0;
-  // for (size_t element = 0; element < 5; element++) {
-  //  swap = array[element];
-  //  array[element] = temp;
-  //  temp = swap;
-  //}
-
-  refresh_coordinate();
-
-  body[0].row -= 1;
-  if (body[0].row < 0) {
-    body[0].row = 9;
-  }
-
-  direction = direction::up;
-}
-void Snake::down_direction(void) {
-  refresh_coordinate();
-
-  body[0].row += 1;
-  if (body[0].row > 9) {
-    body[0].row = 0;
-  }
-
-  direction = direction::down;
-}
-void Snake::left_direction(void) {
-  refresh_coordinate();
-
-  body[0].column -= 1;
-  if (body[0].column < 0) {
-    body[0].column = 9;
-  }
-
-  direction = direction::left;
-}
-void Snake::right_direction(void) {
-  refresh_coordinate();
-
-  body[0].column += 1;
-  if (body[0].column > 9) {
-    body[0].column = 0;
-  }
-
-  direction = direction::right;
-}
-void Snake::unchange_direction(void) {
-  switch (direction) {
-    case direction::up:
-      up_direction();
+void Snake::set_direction(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
+  switch (key) {
+    case Keyboard::keys::up:
+      up_direction(printer, fruit);
+      direction = direction::up;
       break;
-    case direction::down:
-      down_direction();
+    case Keyboard::keys::down:
+      down_direction(printer, fruit);
+      direction = direction::down;
       break;
-    case direction::left:
-      left_direction();
+    case Keyboard::keys::left:
+      left_direction(printer, fruit);
+      direction = direction::left;
       break;
-    case direction::right:
-      right_direction();
+    case Keyboard::keys::right:
+      right_direction(printer, fruit);
+      direction = direction::right;
+      break;
+    case Keyboard::keys::any:
+      unchange_direction(printer, fruit);
+      break;
+    case Keyboard::keys::none:
+      unchange_direction(printer, fruit);
       break;
     default:
       break;
   }
+  return;
+}
+void Snake::up_direction(Printer& printer, Fruit& fruit) {
+  element temp = body[0];
+  temp.position.row -= 1;
+  if (temp.position.row < 0) {
+    temp.position.row = 9;
+  }
+  add_coordinates(printer, fruit, temp);
+  return;
+}
+void Snake::down_direction(Printer& printer, Fruit& fruit) {
+  element temp = body[0];
+  temp.position.row += 1;
+  if (temp.position.row > 9) {
+    temp.position.row = 0;
+  }
+  add_coordinates(printer, fruit, temp);
+  return;
+}
+void Snake::left_direction(Printer& printer, Fruit& fruit) {
+  element temp = body[0];
+  temp.position.column -= 1;
+  if (temp.position.column < 0) {
+    temp.position.column = 9;
+  }
+  add_coordinates(printer, fruit, temp);
+  return;
+}
+void Snake::right_direction(Printer& printer, Fruit& fruit) {
+  element temp = body[0];
+  temp.position.column += 1;
+  if (temp.position.column > 9) {
+    temp.position.column = 0;
+  }
+  add_coordinates(printer, fruit, temp);
+  return;
+}
+void Snake::unchange_direction(Printer& printer, Fruit& fruit) {
+  switch (direction) {
+    case direction::up:
+      up_direction(printer, fruit);
+      break;
+    case direction::down:
+      down_direction(printer,fruit);
+      break;
+    case direction::left:
+      left_direction(printer, fruit);
+      break;
+    case direction::right:
+      right_direction(printer, fruit);
+      break;
+    default:
+      break;
+  }
+  return;
 }
 
-void Snake::refresh_coordinate(void) {
-  Snake::coordinate temp, swap;
-  temp = body[0];
-  for (size_t element = 0; body[element].column != -1; element++) {
-    swap = body[element];
-    body[element] = temp;
-    temp = swap;
+void Snake::refresh_coordinates(void) {
+  element temp1, temp2;
+  temp1 = body[0];
+  for (size_t element = 1; element < length; element++) {
+    temp2 = body[element];
+    body[element] = temp1;
+    temp1 = temp2;
+  }
+  return;
+}
+
+void Snake::add_coordinates(Printer& printer, Fruit& fruit, element &temp ) {
+  if (printer.buffer[temp.position.row * 10 + temp.position.column] == '-') {
+    refresh_coordinates();
+    body[0] = temp;
+  }
+  if (printer.buffer[temp.position.row * 10 + temp.position.column] == '$') {
+    fruit.clear();
+    length += 1;
+    refresh_coordinates();
+    body[0] = temp;
   }
 }
-void Snake::resize(void) {}
 
-void Snake::write(Printer & printer) {
-    memset(printer.buffer, '-', 100);
-    for (size_t element = 0; body[element].row != -1; ++element) {
-      printer.buffer[body[element].row * 10 + body[element].column] = 'X';
-    }
+void Snake::write(Printer& printer) {
+  for (size_t element = 0; body[element].position.row != -1; ++element) {
+    int position =
+        body[element].position.row * 10 + body[element].position.column;
+    printer.buffer[position] = 'X';
+  }
   return;
 }

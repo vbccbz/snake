@@ -1,77 +1,33 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard(void) { 
-  code = key::none; 
-}
+Keyboard::Keyboard(void) { key = keys::none; }
 
 Keyboard::~Keyboard(void) {}
 
-void Keyboard::input(Dot& dot) {
+void Keyboard::input(void) {  ////////////?
   if (_kbhit()) {
     switch (_getch()) {
       case 'w':
-        dot.up();
+        key = keys::up;
         break;
       case 's':
-        dot.down();
+        key = keys::down;
         break;
       case 'a':
-        dot.left();
+        key = keys::left;
         break;
       case 'd':
-        dot.right();
+        key = keys::right;
+        break;
+      case 27: //case 'ESC':
+        key = keys::esc;
         break;
       default:
-        break;
-    }
-  }
-}
-
-void Keyboard::input(DotMoving& dotm) {
-  if (_kbhit()) {
-    switch (_getch()) {
-      case 'w':
-        dotm.up_direction();
-        break;
-      case 's':
-        dotm.down_direction();
-        break;
-      case 'a':
-        dotm.left_direction();
-        break;
-      case 'd':
-        dotm.right_direction();
-        break;
-      default:
-        dotm.unchange_direction();
+        key = keys::any;
         break;
     }
   } else {
-    dotm.unchange_direction();
+    key = keys::none;
   }
-}
-
-Keyboard::key Keyboard::input(void) {  ////////////?
-  if (_kbhit()) {
-    switch (_getch()) {
-      case 'w':
-        code = key::up;
-        break;
-      case 's':
-        code = key::down;
-        break;
-      case 'a':
-        code = key::left;
-        break;
-      case 'd':
-        code = key::right;
-        break;
-      default:
-        code = key::any;
-        break;
-    }
-  } else {
-    code = key::none;
-  }
-  return code;
+  return;
 }
