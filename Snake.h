@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "Fruit.h"
 #include "Keyboard.h"
 #include "Printer.h"
 
@@ -11,16 +12,17 @@ class Snake {
   Snake(void);
   ~Snake(void);
 
-  void set_direction(Keyboard::keys &key, Printer &printer);
+  void set_direction(Keyboard::keys &key, Printer &printer, Fruit &fruit);
 
-  void refresh_coordinates(Printer &printer);
+  void refresh_coordinates(void);
 
-  void up_direction(Printer &printer);
-  void down_direction(Printer &printer);
-  void left_direction(Printer &printer);
-  void right_direction(Printer &printer);
+  void up_direction(Printer &printer, Fruit &fruit);
+  void down_direction(Printer &printer, Fruit &fruit);
+  void left_direction(Printer &printer, Fruit &fruit);
+  void right_direction(Printer &printer, Fruit &fruit);
 
-  void unchange_direction(Printer &printer);
+  void unchange_direction(Printer &printer, Fruit &fruit);
+
 
   void write(Printer &);
 
@@ -35,4 +37,8 @@ class Snake {
   element body[100];
   enum class direction { left, right, up, down };
   direction direction;
+  size_t length;
+
+ public:
+  void add_coordinates(Printer &printer, Fruit &fruit, Snake::element &temp);
 };

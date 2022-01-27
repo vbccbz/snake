@@ -10,6 +10,7 @@ class Fruit {
   ~Fruit(void);
   void generate(void);
   void write(Printer & printer);
+  void clear(void);
  private:
   struct coordinate {
     int row;
