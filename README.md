@@ -1,2 +1,3 @@
 # snake
-windows.h + conio.h or sfml
+windows.h + conio.h 
+<s>sfml</s>
