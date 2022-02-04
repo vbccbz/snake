@@ -116,10 +116,14 @@ void Snake::add_coordinates(Printer& printer, Fruit& fruit, element &temp ) {
     body[0] = temp;
   }
   if (printer.buffer[temp.position.row * 10 + temp.position.column] == '$') {
-    fruit.generate();
+
     length += 1;
     refresh_coordinates();
     body[0] = temp;
+
+    fruit.generate();
+    fruit.write(printer);
+
   }
 }
 

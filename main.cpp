@@ -15,7 +15,6 @@ int main(void) {
     fruit.write(printer);
 
     snake.set_direction(keyboard.key, printer, fruit);
-    fruit.write(printer);
     snake.write(printer);
 
     printer.print();

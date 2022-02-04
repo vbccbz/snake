@@ -21,6 +21,8 @@ void Printer::print(void) {
   }
 
 #ifdef DEBUG
+  Sleep(1000);
+
 #endif  // DEBUG
 #ifndef DEBUG
   Sleep(500);
