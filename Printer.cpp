@@ -23,7 +23,7 @@ void Printer::print(void) {
 #ifdef DEBUG
 #endif  // DEBUG
 #ifndef DEBUG
-  Sleep(200);
+  Sleep(500);
   system("cls");
 #endif  //
   memset(buffer, '-', 100);
