@@ -17,28 +17,6 @@ Snake::Snake(void) {
 
 Snake::~Snake(void) {}
 
-void Snake::set_direction(Keyboard::keys& key) {
-  switch (key) {
-    case Keyboard::keys::up:
-      direction = direction::up;
-      break;
-    case Keyboard::keys::down:
-      direction = direction::down;
-      break;
-    case Keyboard::keys::left:
-      direction = direction::left;
-      break;
-    case Keyboard::keys::right:
-      direction = direction::right;
-      break;
-    case Keyboard::keys::none:
-      break;
-    case Keyboard::keys::any:
-      break;
-  }
-  return;
-}
-
 void Snake::up_direction(Snake::element& temp) {
   temp.position.row -= 1;
   if (temp.position.row < 0) {
@@ -91,9 +69,27 @@ void Snake::write(Printer& printer) {
 }
 
 void Snake::move(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
-  set_direction(key);
+    switch (key) {
+    case Keyboard::keys::up:
+      direction = direction::up;
+      break;
+    case Keyboard::keys::down:
+      direction = direction::down;
+      break;
+    case Keyboard::keys::left:
+      direction = direction::left;
+      break;
+    case Keyboard::keys::right:
+      direction = direction::right;
+      break;
+    case Keyboard::keys::none:
+      break;
+    case Keyboard::keys::any:
+      break;
+  }
 
   element temp = body[0];
+
   switch (direction) {
     case direction::up:
       up_direction(temp);
