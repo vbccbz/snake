@@ -8,11 +8,12 @@ int main(void) {
   Snake snake;
   Fruit fruit;
   Printer printer;
+  fruit.generate();
 
   while ( keyboard.key != Keyboard::keys::esc) {
     keyboard.input();
     
-    fruit.generate();
+    //fruit.generate();
     fruit.write(printer);
 
     snake.set_direction(keyboard.key, printer, fruit);
