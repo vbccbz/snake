@@ -8,24 +8,6 @@
 class Snake {
   friend class Printer;
 
- public:
-  Snake(void);
-  ~Snake(void);
-
-  void set_direction(Keyboard::keys &key, Printer &printer, Fruit &fruit);
-
-  void refresh_coordinates(void);
-
-  void up_direction(Printer &printer, Fruit &fruit);
-  void down_direction(Printer &printer, Fruit &fruit);
-  void left_direction(Printer &printer, Fruit &fruit);
-  void right_direction(Printer &printer, Fruit &fruit);
-
-  void unchange_direction(Printer &printer, Fruit &fruit);
-
-
-  void write(Printer &);
-
  private:
   struct coordinate {
     int row;
@@ -40,5 +22,18 @@ class Snake {
   size_t length;
 
  public:
-  void add_coordinates(Printer &printer, Fruit &fruit, Snake::element &temp);
+  Snake(void);
+  ~Snake(void);
+
+  void move(Keyboard::keys &key, Printer &printer, Fruit &fruit);
+  void set_direction(Keyboard::keys &key);
+  void refresh_coordinates(void);
+
+  void up_direction(Snake::element &temp);
+  void down_direction(Snake::element &temp);
+  void left_direction(Snake::element &temp);
+  void right_direction(Snake::element &temp);
+
+  void write(Printer &);
+
 };
