@@ -7,9 +7,10 @@ Printer::Printer(void) {
 Printer::~Printer(void) { ; }
 
 void Printer::print(void) {
-  //std::cout << "frame " << frame << '\n';
-  //frame += 1;
-
+#ifdef DEBUG
+  std::cout << "frame " << frame << '\n';
+  frame += 1;
+#endif
   for (size_t row = 0; row < 10; ++row) {
     for (size_t column = 0; column < 10; ++column) {
       std::cout << buffer[row * 10 + column];
@@ -19,18 +20,21 @@ void Printer::print(void) {
     // Sleep(50);
   }
 
-  Sleep(300);
+#ifdef DEBUG
+#endif  // DEBUG
+#ifndef DEBUG
+  Sleep(200);
   system("cls");
+#endif  //
   memset(buffer, '-', 100);
-
   return;
 }
 
 void Printer::clear(void) {
-  //pixel zero;
-  //zero.column = -1;
-  //zero.row = -1;
-  //for (size_t i = 0; i < 100; i++) {
+  // pixel zero;
+  // zero.column = -1;
+  // zero.row = -1;
+  // for (size_t i = 0; i < 100; i++) {
   //  buffer2[i] = zero;
   //}
   return;

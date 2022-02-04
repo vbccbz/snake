@@ -6,9 +6,9 @@ Snake::Snake(void) {
     body[element].position.column = -1;
   }
 
-  body[0].position.row = 5;
+  body[0].position.row = 6;
   body[0].position.column = 5;
-  body[1].position.row = 5;
+  body[1].position.row = 6;
   body[1].position.column = 6;
 
   direction = direction::right;
@@ -34,13 +34,11 @@ void Snake::set_direction(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
       right_direction(printer, fruit);
       direction = direction::right;
       break;
-    case Keyboard::keys::any:
-      unchange_direction(printer, fruit);
-      break;
     case Keyboard::keys::none:
       unchange_direction(printer, fruit);
       break;
-    default:
+    case Keyboard::keys::any:
+      unchange_direction(printer, fruit);
       break;
   }
   return;
@@ -126,10 +124,9 @@ void Snake::add_coordinates(Printer& printer, Fruit& fruit, element &temp ) {
 }
 
 void Snake::write(Printer& printer) {
-  for (size_t element = 0; body[element].position.row != -1; ++element) {
-    int position =
-        body[element].position.row * 10 + body[element].position.column;
-    printer.buffer[position] = 'X';
+  for (size_t element = 0; element != length; ++element) {
+    printer.buffer[body[element].position.row * 10 +
+                   body[element].position.column] = 'X';
   }
   return;
 }

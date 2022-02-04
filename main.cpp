@@ -2,14 +2,12 @@
 #include "Snake.h"
 #include "Fruit.h"
 #include "Printer.h"
-//#include "World.h"
 
 int main(void) {
   Keyboard keyboard;
   Snake snake;
   Fruit fruit;
   Printer printer;
-  //World world;
 
   while ( keyboard.key != Keyboard::keys::esc) {
     keyboard.input();
