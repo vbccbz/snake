@@ -17,6 +17,66 @@ Snake::Snake(void) {
 
 Snake::~Snake(void) {}
 
+void Snake::move(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
+  switch (key) {
+    case Keyboard::keys::up:
+      direction = direction::up;
+      break;
+    case Keyboard::keys::down:
+      direction = direction::down;
+      break;
+    case Keyboard::keys::left:
+      direction = direction::left;
+      break;
+    case Keyboard::keys::right:
+      direction = direction::right;
+      break;
+    case Keyboard::keys::none:
+      break;
+    case Keyboard::keys::any:
+      break;
+  }
+
+  element temp = body[0];
+
+  switch (direction) {
+    case direction::up:
+      up_direction(temp);
+      break;
+    case direction::down:
+      down_direction(temp);
+      break;
+    case direction::left:
+      left_direction(temp);
+      break;
+    case direction::right:
+      right_direction(temp);
+      break;
+    default:
+      break;
+  }
+
+  switch (printer.buffer[temp.position.row * 10 + temp.position.column]) {
+    case '-':
+      refresh_coordinates();
+      body[0] = temp;
+      break;
+    case '$':
+      length += 1;
+      refresh_coordinates();
+      body[0] = temp;
+      fruit.generate();
+      fruit.write(printer);
+      break;
+    case 'S':
+      break;
+    default:
+      break;
+  }
+
+  return;
+}
+
 void Snake::up_direction(Snake::element& temp) {
   temp.position.row -= 1;
   if (temp.position.row < 0) {
@@ -61,62 +121,9 @@ void Snake::refresh_coordinates(void) {
 }
 
 void Snake::write(Printer& printer) {
-  for (size_t element = 0; element != length; ++element) {
+  for (size_t element = 0; element < length; ++element) {
     printer.buffer[body[element].position.row * 10 +
                    body[element].position.column] = 'X';
-  }
-  return;
-}
-
-void Snake::move(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
-    switch (key) {
-    case Keyboard::keys::up:
-      direction = direction::up;
-      break;
-    case Keyboard::keys::down:
-      direction = direction::down;
-      break;
-    case Keyboard::keys::left:
-      direction = direction::left;
-      break;
-    case Keyboard::keys::right:
-      direction = direction::right;
-      break;
-    case Keyboard::keys::none:
-      break;
-    case Keyboard::keys::any:
-      break;
-  }
-
-  element temp = body[0];
-
-  switch (direction) {
-    case direction::up:
-      up_direction(temp);
-      break;
-    case direction::down:
-      down_direction(temp);
-      break;
-    case direction::left:
-      left_direction(temp);
-      break;
-    case direction::right:
-      right_direction(temp);
-      break;
-    default:
-      break;
-  }
-  if (printer.buffer[temp.position.row * 10 + temp.position.column] == '-') {
-    refresh_coordinates();
-    body[0] = temp;
-  }
-  if (printer.buffer[temp.position.row * 10 + temp.position.column] == '$') {
-    length += 1;
-    refresh_coordinates();
-    body[0] = temp;
-
-    fruit.generate();
-    fruit.write(printer);
   }
   return;
 }
