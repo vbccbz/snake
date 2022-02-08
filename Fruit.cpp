@@ -1,9 +1,9 @@
 #include "Fruit.h"
 
 Fruit::Fruit(void) {
+  body.position.row = 4;
   body.position.column = 5;
-  body.position.row = 6;
-  //generate();
+  // generate();
 }
 Fruit::~Fruit(void) {}
 void Fruit::generate(void) {

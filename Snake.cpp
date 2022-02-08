@@ -4,15 +4,29 @@ Snake::Snake(void) {
   for (size_t element = 0; element < 100; element++) {
     body[element].position.row = -1;
     body[element].position.column = -1;
+    body[element].number = element;
   }
-
-  body[0].position.row = 6;
-  body[0].position.column = 5;
-  body[1].position.row = 6;
-  body[1].position.column = 6;
-
   direction = direction::right;
-  length = 2;
+
+  length = 5;
+
+  body[0].number = 0;
+  body[1].number = 1;
+  body[2].number = 2;
+  body[3].number = 3;
+  body[4].number = 4;
+
+  body[0].position.row = 5;
+  body[1].position.row = 5;
+  body[2].position.row = 5;
+  body[3].position.row = 5;
+  body[4].position.row = 5;
+
+  body[0].position.column = 5;
+  body[1].position.column = 4;
+  body[2].position.column = 3;
+  body[3].position.column = 2;
+  body[4].position.column = 1;
 };
 
 Snake::~Snake(void) {}
@@ -37,93 +51,79 @@ void Snake::move(Keyboard::keys& key, Printer& printer, Fruit& fruit) {
       break;
   }
 
-  element temp = body[0];
+  // логика головы, логика хвоста
+  // голова будет сталкиваться с элементом, который на самом деле вышел бы
+  // из-под удара в следующем тике
+  // логика хвоста, логика головы
+  // лучше выход за границы реальной длина (length) не критичен, потому что все
+  // остальные взаимодействия ограничены length
 
+  // update all elements
+  update();
+
+  // choose direction for first element
   switch (direction) {
     case direction::up:
-      up_direction(temp);
+      body[0].position.row -= 1;
+      if (body[0].position.row < 0) {
+        body[0].position.row = 9;
+      }
       break;
     case direction::down:
-      down_direction(temp);
+      body[0].position.row += 1;
+      if (body[0].position.row > 9) {
+        body[0].position.row = 0;
+      }
       break;
     case direction::left:
-      left_direction(temp);
+      body[0].position.column -= 1;
+      if (body[0].position.column < 0) {
+        body[0].position.column = 9;
+      }
       break;
     case direction::right:
-      right_direction(temp);
+      body[0].position.column += 1;
+      if (body[0].position.column > 9) {
+        body[0].position.column = 0;
+      }
       break;
     default:
       break;
   }
 
-  switch (printer.buffer[temp.position.row * 10 + temp.position.column]) {
-    case '-':
-      refresh_coordinates();
-      body[0] = temp;
-      break;
-    case '$':
-      length += 1;
-      refresh_coordinates();
-      body[0] = temp;
-      fruit.generate();
-      fruit.write(printer);
-      break;
-    case 'S':
-      break;
-    default:
-      break;
-  }
-
-  return;
-}
-
-void Snake::up_direction(Snake::element& temp) {
-  temp.position.row -= 1;
-  if (temp.position.row < 0) {
-    temp.position.row = 9;
-  }
-  return;
-}
-
-void Snake::down_direction(Snake::element& temp) {
-  temp.position.row += 1;
-  if (temp.position.row > 9) {
-    temp.position.row = 0;
-  }
-  return;
-}
-
-void Snake::left_direction(Snake::element& temp) {
-  temp.position.column -= 1;
-  if (temp.position.column < 0) {
-    temp.position.column = 9;
-  }
-  return;
-}
-
-void Snake::right_direction(Snake::element& temp) {
-  temp.position.column += 1;
-  if (temp.position.column > 9) {
-    temp.position.column = 0;
-  }
-  return;
-}
-
-void Snake::refresh_coordinates(void) {
-  element temp1, temp2;
-  temp1 = body[0];
+  // find intersection
   for (size_t element = 1; element < length; element++) {
-    temp2 = body[element];
-    body[element] = temp1;
-    temp1 = temp2;
+    if (body[0].position.row == body[element].position.row &&
+        body[0].position.column == body[element].position.column) {
+      length = body[element].number;
+    }
   }
+
+  // check fruit, eat fruit
+  if (printer.buffer[body[0].position.row * 10 + body[0].position.column] ==
+      '$') {
+    length += 1;
+    fruit.generate();
+    fruit.write(printer);
+  }
+
   return;
+}
+void Snake::update(void) {
+  element temp1, temp2;
+  temp1.position = body[0].position;
+  for (size_t element = 0; element <= length; ++element) {  //!!!!!!!!
+    temp2.position = body[element].position;
+    body[element].position = temp1.position;
+    temp1.position = temp2.position;
+  }
 }
 
 void Snake::write(Printer& printer) {
-  for (size_t element = 0; element < length; ++element) {
-    printer.buffer[body[element].position.row * 10 +
-                   body[element].position.column] = 'X';
+  printer.buffer[body[0].position.row * 10 + body[0].position.column] = 'S';
+  for (size_t element = 1; element < length; ++element) {
+    int place = body[element].position.row * 10 + body[element].position.column;
+    printer.buffer[place] = 's';
   }
   return;
 }

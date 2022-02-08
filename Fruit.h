@@ -10,15 +10,12 @@ class Fruit {
   ~Fruit(void);
   void generate(void);
   void write(Printer & printer);
-  void clear(void);
  private:
-  struct coordinate {
-    int row;
-    int column;
-  };
   struct element {
-    coordinate position;
-  };
-  element body;
+    struct coordinate {
+      int row;
+      int column;
+    } position;
+  } body;
 };
 

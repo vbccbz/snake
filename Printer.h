@@ -8,12 +8,11 @@
 
 class Printer {
  private:
-  int frame;
+  int tick;
 
  public:
   Printer(void);
   ~Printer(void);
-  char buffer[100];
-  int score;
+  char buffer[1000];
   void print(void);
 };
