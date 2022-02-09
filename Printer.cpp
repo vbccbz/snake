@@ -1,7 +1,7 @@
 #include "Printer.h"
 
 Printer::Printer(void) {
-  memset(buffer, '-', 100);
+  memset(buffer, '.', 100);
   tick = 0;
 }
 Printer::~Printer(void) { ; }
@@ -29,6 +29,5 @@ void Printer::print(void) {
   system("cls");
 #endif
 
-  memset(buffer, '-', 100);
   return;
 }

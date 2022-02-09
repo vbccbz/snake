@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "Fruit.h"
 #include "Keyboard.h"
+#include "World.h"
 #include "Printer.h"
 #include "Fruit.h"
 
@@ -24,12 +24,10 @@ class Snake {
   enum class direction { left, right, up, down } direction;
 
  public:
-  Snake(void);
+  Snake(World & world);
   ~Snake(void);
 
-  void move(Keyboard::keys &key, Printer &printer, Fruit& fruit);
-  
-  void write(Printer &);
+  void move(Keyboard::keys &key, World &world);
 
  private:
   void update(void);

@@ -1,19 +1,21 @@
 #include "Keyboard.h"
+#include "World.h"
 #include "Printer.h"
 #include "Snake.h"
 #include "Fruit.h"
-
 int main(void) {
   Keyboard keyboard;
   Printer printer;
-  Snake snake;
-  Fruit fruit;
+
+  World world;
+  Snake snake(world);
+  Fruit fruit(world);
 
   while ( keyboard.key != Keyboard::keys::esc) {
     keyboard.input();
-    
-    //fruit.generate(printer); :-(
-    //fruit.write(printer);
+    fruit.generate(world);
+    snake.move(keyboard.key, world);
+    world.write(printer);
 
     // Если за генерацию фрукта отвечает змейка:
       // новый фрукт появляется в том же кадре, что и поглощение старого фрукта;
@@ -24,10 +26,6 @@ int main(void) {
       // есть необходимость вызова генерации в главном цикле;
       // фрукт обязан каждый раз проверять факт существования фрукта;
     // Второй способ позволяет запретить змейке доступ ко фрукту, но всё равно остаётся проблема того, что змейка поглощением изменяет состояние фрукта, а значит должна иметь доступ к его данным.
-
-    fruit.write(printer);
-    snake.move(keyboard.key, printer, fruit);
-    snake.write(printer);
 
     printer.print();
   }
