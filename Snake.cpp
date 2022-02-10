@@ -90,6 +90,7 @@ void Snake::move(Keyboard::keys& key, World& world) {
 
   switch (world.table[temp.position.row * 10 + temp.position.column]) {
     case '-':
+      // clear
       world.table[body[length - 1].position.row * 10 +
                   body[length - 1].position.column] = '-';
 
@@ -105,8 +106,9 @@ void Snake::move(Keyboard::keys& key, World& world) {
       break;
 
     case '$':
-      length += 1;
+      // no clear
 
+      length += 1;
       update();
       body[0].position = temp.position;
 
@@ -119,22 +121,21 @@ void Snake::move(Keyboard::keys& key, World& world) {
       break;
 
     case 's':
-      //clear
+      // clear
       for (size_t element = 0; element < length; element++) {
         world.table[body[element].position.row * 10 +
                     body[element].position.column] = '-';
       }
-
-      update();
-
+  
       // find intersection
       for (size_t element = 1; element < length; element++) {
         if (temp.position.row == body[element].position.row &&
             temp.position.column == body[element].position.column) {
-          length = body[element].number;
+          length = body[element].number + 1;
         }
       }
 
+      update();
       body[0].position = temp.position;
 
       world.table[body[0].position.row * 10 + body[0].position.column] = 'S';
