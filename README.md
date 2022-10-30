@@ -1,2 +1,2 @@
 # snake_cmd
-[ ] (snk_cmd.gif)
+[ gif ] (snk_cmd.gif)
