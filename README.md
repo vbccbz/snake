@@ -1,2 +1,2 @@
 # snake_cmd
-[](/snk_cmd.gif)
+![/imag](/snk_cmd.gif)
